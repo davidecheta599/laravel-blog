@@ -8,9 +8,6 @@ include("functions/functions.php");
 <head>
 <title>Shop on line</title>
 
- 
-
-		
 <link rel="stylesheet" type="text/css" href="styles/style.css" media="all"/>
 
 </head>
@@ -26,7 +23,7 @@ include("functions/functions.php");
 
 
     <div id="logo">
-	<a href="index.php"/> <img  src="images/logo.jpg"/> 
+	<a href="../index.php"/> <img  src="images/logo.jpg"/> 
 			   <img  src="images/pic1.jpg"/>
 			   <img  src="images/pic2.jpg"/>
 			   <img  src="images/apple-logo.png"/>
@@ -45,16 +42,15 @@ include("functions/functions.php");
   
 <div class="menubar">
   <ul id="menu">
-     <li> <a href="index.php">Home </a> </li>
-	 <li> <a href="all_products.php">all products </a> </li>
-	 <li> <a href="customer/my_account.php">my account </a> </li>
+  <!-- -- -- -- ---we use ../ when the script u are trying to access is not in the folder bt back the folder - - -- --------------------------------- -->
+  
+     <li> <a href="../index.php">Home </a> </li>
+	 <li> <a href="../all_products.php">all products </a> </li>
+	 <li> <a href="my_account.php">my account </a> </li>
 	 <li> <a href="#">sign up </a> </li>
-	 <li> <a href="cart.php">shopping cart</a> </li>
+	 <li> <a href="../cart.php">shopping cart</a> </li>
 	 <li> <a href="#">contact us</a> </li>
   </ul>
-  
-  
-  
 <div id="form">
               <form action="results.php" method="get" enctype="multipart/form-data">
                  <input type="text" name="user_query" placeholder="search a product" />
@@ -68,24 +64,45 @@ include("functions/functions.php");
 
    <div id="sidebar">
    
-    <div id="sidebar_title">
-	Categories</div>
+    <div id="sidebar_title">My Account:</div>
+	
 	
  <ul id="cats">
+ <?php 
+  //display the user account image
+        $user = $_SESSION['customer_email'];
+		
+		$get_img = "select *from customer where customer_email='$user'";
+		
+		$run_img =mysqli_query($con, $get_img);
+		
+		$row_img = mysqli_fetch_array($run_img);
+		
+		 $c_image =  $row_img['customer_image'];
+		 
+		  $c_name =  $row_img['customer_name'];
+		 
+		 echo"<p style='text-align:center;'> <img src='customer_images/$c_image' width='150' height='150'/></p>";
  
-	<?php getCats() ;?>
+ 
+ 
+ 
+ 
+ 
+ 
+ ?>
+	<li><a href="my_account.php?my_account">My Orders</a></li>
 	
- </ul>
+	<li><a href="my_account.php?edit_account">Edit Account</a></li>
 	
-   <div id="sidebar_title">
-	Brands</div>
+	<li><a href="my_account.php?change_pass">Change password</a></li>
 	
- <ul id="cats">
- <?php getbrands() ;?>
+	<li><a href="my_account.php?delete_account">Delete Account</a></li>
+	<li><a href="logout.php">Logout</a></li>
 	
- </ul>
+
    
-   
+   </ul>
    </div>
 
    <div id="content_area">
@@ -137,13 +154,38 @@ include("functions/functions.php");
    
    
      <div id="products_box">
-	<!--NOTE any of this functions will display on the content_area  if call for bcos its not echo instantly--> 
-	 <?php getpro();   ?>                                                       
-	 <?php getcatpro();   ?>                                                    
-	  <?php getbrandpro();   ?>                                                   
+	                                          
+
+	<?php 
+	    if(!isset($_GET['my_orders'])){
+			 if(!isset($_GET['edit_account'])){
+				  if(!isset($_GET['change_pass'])){
+					   if(!isset($_GET['delete_account'])){
 	
+	echo "	<h2 style='padding:20px;'>Welcome:  $c_name  </h2>
+	
+	<b> You can see your orders Progress by clicking this <a href='my_account.php?my_orders'>link</a></b>";
 	  
-	 
+		}
+		}
+		}
+		} ?>
+		
+		<?php 
+		  if(isset($_GET['edit_account'])){
+			include("edit_account.php");  
+			  
+		  }
+		
+		 if(isset($_GET['change_pass'])){
+			include("change_pass.php");  
+			  
+		  }
+		   if(isset($_GET['delete_account'])){
+			include("delete_account.php");  
+			  
+		  }
+		?>
 	 </div>
    
    
@@ -158,7 +200,7 @@ include("functions/functions.php");
               <img style="height:30px;" src="images/social-icons.png"/>                                               </h4>
 
 </div>
-
+ 
 
 </div>
 <!-- -- -- -- ---main container ends here- - -- --------------------------------- -->

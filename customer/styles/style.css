@@ -35,7 +35,7 @@ body{background:skyblue;}
 	width:1000px;
 	height:auto;
 	margin:auto;
-	background:black;
+	background:pink;
 	
 }
 .header_wrapper{
@@ -94,13 +94,13 @@ body{background:skyblue;}
 #content_area{
 	width:800px;
 	/*height:800px; we romove the helght cos is better to make it auto*/
-	float:right;
+	float:left;
 	background:pink;
 }
 #sidebar{
 	width:200px;
 /*height:800px; we romove the helght cos is better to make it auto*/
-	float:left;
+	float:right;
 	background:black;}
 	
 	#sidebar_title{
@@ -113,23 +113,24 @@ body{background:skyblue;}
 	}
 	
 	#cats{
-		text-align:center;margin:5px;
+		text-align:left;
 	}
-	#cats li{list-style:none;
+	#cats li{list-style:none;margin:5px;
 	}
 	
 	#cats a{
-    color:white;
+    color:orange;
 	padding:8px; 
 	margin:5px;
-	text-align:center;
+	text-align:left;
 	text-decoration:none;
-	font-size:20px;
+	font-size:17px;
 	font-family:comic san ms;
 	}
 	#cats a:HOVER{
 	font-weight:bolder;
-	color:orange;text-decoration:underline;}
+	color:white;text-decoration:underline;}
+	#cats img{border:2px solid white;padding:4px;}
 	
 	
 	#products_box{
@@ -155,7 +156,7 @@ margin-bottom:10px;
 	clear:both;
 	text-align:center;
 	}
-#insert td {padding:5px;}
+
 
 
 
